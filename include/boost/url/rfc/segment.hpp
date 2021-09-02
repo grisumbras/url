@@ -13,7 +13,6 @@
 #include <boost/url/detail/config.hpp>
 #include <boost/url/error.hpp>
 #include <boost/url/string.hpp>
-#include <boost/url/rfc/pchar.hpp>
 #include <boost/url/rfc/pct_encoding.hpp>
 #include <boost/url/bnf/repeat.hpp>
 

@@ -14,6 +14,7 @@
 #include <boost/url/error.hpp>
 #include <boost/url/string.hpp>
 #include <boost/url/rfc/char_sets.hpp>
+#include <boost/url/rfc/pct_encoding.hpp>
 
 namespace boost {
 namespace urls {
