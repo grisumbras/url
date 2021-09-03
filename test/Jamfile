@@ -8,21 +8,15 @@
 #
 
 import testing ;
-import ../../config/checks/config : requires ;
 
-import os ;
-STANDALONE = [ os.environ STANDALONE ] ;
-if $(STANDALONE)
-{
-    LIB =
-        <define>BOOST_URL_STANDALONE=1
-        <source>../src/src.cpp
-        ;
-}
-else
-{
-    LIB = <library>/boost/url//boost_url ;
-}
+
+project
+    : requirements
+      $(c11-requires)
+      <source>include/main.cpp
+      <include>include
+    ;
+
 
 local SOURCES =
     _detail_char_type.cpp
@@ -33,30 +27,17 @@ local SOURCES =
     static_pool.cpp
     storage_ptr.cpp
     url.cpp
-    url_base.cpp
     url_view.cpp
     urls.cpp
     ;
+for local f in $(SOURCES)
+{
+    run $(f) /boost/url//boost_url ;
+}
 
 local LIMIT_SOURCES =
     ;
-
-local RUN_TESTS ;
-
-for local f in $(SOURCES)
-{
-    RUN_TESTS += [
-        run $(f) main.cpp : : :
-            $(LIB)
-        ] ;
-}
-
 for local f in $(LIMIT_SOURCES)
 {
-    RUN_TESTS += [
-        run $(f) main.cpp : : :
-            <source>../src/src.cpp
-        ] ;
+    run $(f) include/main.cpp /boost/url//url_sources ;
 }
-
-alias run-tests : $(RUN_TESTS) ;
